@@ -32,12 +32,7 @@ app.use(session(sess))
 // ==================================
 app.use(flash())
 app.use((req, res, next) => {
-  req.flash(
-    'success',
-    `You've been successfully redirected to the Message route!`
-  )
-  req.flash('info', `Thus is Message page!`)
-  req.flash('error', `This is error message!`)
+  res.locals.msg = req.flash()
   next()
 })
 app.use(express.json())

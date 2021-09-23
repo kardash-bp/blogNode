@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+
+  <body>
+    <%- include('partials/navbar') %> <%- include('partials/mainHeader') %>
+
+    <!-- Post Content-->
+    <article class="mb-4">
+      <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <div class="row header">
+              <h3>CONTACT US &nbsp;</h3>
+              <h5>Fill out the form below to learn more!</h5>
+            </div>
+            <div class="row body">
+              <form action="#">
+                <div class="mb-3">
+                  <label for="email-field" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email-field"
+                    placeholder="name@example.com"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="msg-textarea" class="form-label">Message</label>
+                  <textarea
+                    class="form-control"
+                    id="msg-textarea"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-primary my-3">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+    <%- include('partials/footer') %>
+  </body>
+</html>

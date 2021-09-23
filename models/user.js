@@ -11,7 +11,6 @@ const userSchema = mongoose.Schema(
       unique: true,
       required: [true, "can't be blank"],
       match: [/^[a-zA-Z0-9]+$/, 'is invalid'],
-      minLength: [3, 'Name is too short!'],
     },
     email: {
       type: String,
@@ -19,13 +18,10 @@ const userSchema = mongoose.Schema(
       unique: true,
       required: [true, "can't be blank"],
       match: [/\S+@\S+\.\S+/, 'is invalid'],
-      index: true,
     },
     password: {
       type: String,
       required: [true, 'Password is mandatory'],
-      minLength: [3, 'Password is too short!'],
-      maxLength: 50,
     },
     avatar: {
       type: Buffer,

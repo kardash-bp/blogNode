@@ -3,17 +3,18 @@
   <%- include('./partials/head'); %>
 
   <body>
-    <%- include('./partials/navbar'); %>
+    <%- include('./partials/navbar'); %> <%- include('./partials/mainHeader');
+    %>
 
     <div class="container col-md-6">
-      <!-- <% if(typeof err != 'undefined'){ %>
+      <h1>Registration Form</h1>
+      <% if(typeof err != 'undefined'){ %>
       <p class="alert alert-danger"><%= err %></p>
       <% } %> <% if(typeof errors != 'undefined') { %> <% errors.forEach(err =>
       { %>
-      <p class="alert alert-danger"><%= err.msg %></p>
-      <% }) %> <% } %> -->
+      <p class="alert alert-danger"><%= err %></p>
+      <% }) %> <% } %>
 
-      <h1>Registration Form</h1>
       <form method="POST" action="/user/add">
         <div class="form-group">
           <label for="exampleFormControlInput1">Username</label>
