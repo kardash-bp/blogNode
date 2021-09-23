@@ -13,6 +13,7 @@ class Database {
           useNewUrlParser: true,
           useFindAndModify: false,
           useUnifiedTopology: true,
+          useCreateIndex: true,
         }
       )
       console.log(`MongoDB connected: ${con.connection.host}`)

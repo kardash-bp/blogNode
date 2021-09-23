@@ -9,6 +9,7 @@ const expressValidator = require('express-validator')
 const { nanoid } = require('nanoid')
 const blogRouter = require('./routers/blogRouter')
 const postRouter = require('./routers/postRouter')
+const userRouter = require('./routers/userRouter')
 const multer = require('multer')
 const upload = multer({ dest: './public/uploads/' })
 const app = express()
@@ -53,7 +54,17 @@ app.locals.truncate = (str, max, suffix) =>
         0,
         str.substr(0, max - suffix.length).lastIndexOf(' ')
       )}${suffix}`
-
+// use for field validation and customizing the messages
+// app.use(
+//   expressValidator({
+//     errorFormatter: function (param, msg, value) {
+//       return {
+//         message: msg,
+//       }
+//     },
+//   })
+// )
+app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/', blogRouter)
 //* catch 404 and forward to error handler
