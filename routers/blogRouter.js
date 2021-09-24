@@ -4,7 +4,7 @@ const Post = require('../models/post')
 
 router.get('/', async (req, res) => {
   try {
-    const posts = await Post.find()
+    const posts = await Post.find().sort({ date: -1 })
     posts.forEach((el) => {})
     res.render('index', { posts: posts })
   } catch (err) {

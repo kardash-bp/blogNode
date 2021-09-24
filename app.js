@@ -20,8 +20,8 @@ app.use(xss())
 const session = require('express-session')
 const sess = {
   secret: 'kardas',
-  resave: true,
-  saveUninitialized: true,
+  resave: false,
+  saveUninitialized: false,
   cookie: { maxAge: 3600000 },
 }
 if (app.get('env') === 'production') {
@@ -29,10 +29,12 @@ if (app.get('env') === 'production') {
   sess.cookie.secure = true // serve secure cookies
 }
 app.use(session(sess))
+
 // ==================================
 app.use(flash())
 app.use((req, res, next) => {
   res.locals.msg = req.flash()
+  res.locals.currentUser = req.session.user
   next()
 })
 app.use(express.json())

@@ -7,27 +7,28 @@
     %>
 
     <!-- Login Form -->
-    <div class="container">
+    <div class="container col-md-6">
+      <% if(typeof err != 'undefined'){ %>
+      <p class="alert alert-danger"><%= err %></p>
+      <% } %> <% if(typeof errors != 'undefined') { %> <% errors.forEach(err =>
+      { %>
+      <p class="alert alert-danger"><%= err %></p>
+      <% }) %> <% } %>
       <div class="row justify-content-center mt-5">
-        <div class="col-lg-4 col-md-6 col-sm-6">
+        <div class="">
           <div class="card shadow">
             <div class="card-title text-center border-bottom">
-              <% if (msg.success) { %>
-              <div class="alert alert-success"><%= msg.success %></div>
-              <% } %> <% if (msg.error) { %>
-              <div class="alert alert-danger"><%= msg.error %></div>
-              <% } %>
               <h2 class="p-3">Login</h2>
             </div>
             <div class="card-body">
               <form method="POST" action="/user/login">
                 <div class="mb-4">
-                  <label for="username" class="form-label">Email</label>
-                  <input type="text" class="form-control" id="username" />
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" class="form-control" name="username" />
                 </div>
                 <div class="mb-4">
                   <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" />
+                  <input type="password" class="form-control" name="password" />
                 </div>
                 <div class="mb-4">
                   <input

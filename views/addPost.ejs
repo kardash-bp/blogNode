@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <%- include('./partials/head'); %>
-  </head>
+  <%- include('./partials/head'); %>
 
-  <body class="container">
-    <header><%- include('./partials/navbar'); %></header>
-
-    <main>
+  <body >
+    <%- include('./partials/navbar'); %> <%- include('./partials/mainHeader');
+    %>
+    <div class="container col-md-6" >
       <% if(typeof err != 'undefined'){ %>
       <p class="alert alert-danger"><%= err %></p>
       <% } %> <% if(typeof errors != 'undefined') { %> <% errors.forEach(err =>
       { %>
-      <p class="alert alert-danger"><%= err.msg %></p>
+      <p class="alert alert-danger"><%= err %></p>
       <% }) %> <% } %>
-      <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.15.0/ckeditor.js"
-        integrity="sha512-bNMnTgKRxN1n+5rgfcf160HT2koHRcwLcSq/3JDOY9R65mja48E4Hh+a+IQXVaY2NoJCVC+pr0qE3Vz194QwnA=="
-        crossorigin="anonymous"
-      ></script>
 
       <h1><%= title %></h1>
-      <form method="POST" action="/add">
+      <form method="POST" action="/post/add" enctype="multipart/form-data">
         <div class="form-group">
           <label for="exampleFormControlInput1">Title</label>
           <input
@@ -33,46 +26,48 @@
           />
         </div>
         <div class="form-group">
+          <label for="sub">Subtitle</label>
+          <input
+            name="subtitle"
+            type="text"
+            class="form-control"
+            id="sub"
+            placeholder="Enter a subtitle"
+          />
+        </div>
+        <% if(typeof cat != 'undefined') { %>
+        <div class="form-group">
           <label for="select-category">Category</label>
           <select
             name="category"
             class="form-control w-50"
             id="select-category"
           >
-            <% if(typeof categories != 'undefined') { %> <% categories.forEach(c
-            => { %>
+             <% cat.forEach(c => { %>
             <option value="<%= c.name %>"><%= c.name %></option>
-            <% }) %> <% } %>
+            <% }) %>
           </select>
         </div>
-
+        <% } %>
         <div class="form-group">
           <label for="textarea-body">Post text</label>
           <textarea
-            name="body"
+            name="text"
             class="form-control"
             id="textarea-body"
             rows="3"
           >
           </textarea>
-          <script>
-            CKEDITOR.replace('body')
-          </script>
         </div>
         <div class="form-group">
-          <label for="select-author">Author</label>
-          <select name="author" class="form-control w-50" id="select-author">
-            <option>1</option>
-            <option>2</option>
-          </select>
+          <label>Upload post image</label>
+        <input type="file" name="post-img" />
         </div>
 
-        <button type="submit" class="btn btn-primary mb-5">Save post</button>
+        <button type="submit" class="btn btn-primary my-3">Save post</button>
       </form>
     </main>
 
-    <footer class="page-footer font-small cyan darken-3 bg-light">
-      <%- include('./partials/footer'); %>
-    </footer>
+    <%- include('./partials/footer'); %>
   </body>
 </html>

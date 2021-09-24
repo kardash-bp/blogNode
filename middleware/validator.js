@@ -1,5 +1,20 @@
 const { body, validationResult } = require('express-validator')
 const User = require('../models/user')
+const Post = require('../models/post')
+
+const postValidationRules = () => {
+  return [
+    body('title').not().isEmpty().withMessage('Must have title'),
+    body('subtitle').not().isEmpty().withMessage('Must have subtitle'),
+    body('text').trim().isLength({ min: 5 }).withMessage('Must have some text'),
+  ]
+}
+const loginValidationRules = () => {
+  return [
+    body('username').not().isEmpty().withMessage('Must have username'),
+    body('password').not().isEmpty().withMessage('Must have password'),
+  ]
+}
 const userValidationRules = () => {
   return [
     body('username')
@@ -49,6 +64,8 @@ const validate = (req, res, next) => {
   next()
 }
 module.exports = {
+  loginValidationRules,
+  postValidationRules,
   userValidationRules,
   validate,
 }

@@ -11418,7 +11418,8 @@ blockquote {
   padding: 0.75rem;
   text-transform: uppercase;
 }
-#mainNav .navbar-nav > li.nav-item > a.nav-link {
+/* #mainNav .navbar-nav > li.nav-item > a.nav-link , */
+#mainNav .navbar-nav > li.nav-item {
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.0625em;
@@ -11487,7 +11488,7 @@ footer {
 
 header.masthead {
   position: relative;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   padding-top: calc(4rem + 57px);
   padding-bottom: 4rem;
   background: no-repeat center center;
