@@ -11,9 +11,12 @@ const postValidationRules = () => {
 }
 const loginValidationRules = () => {
   return [
-    body('username').not().isEmpty().withMessage('Must have username'),
-    body('password').not().isEmpty().withMessage('Must have password'),
+    body('username').not().isEmpty().withMessage('Must have a unique username'),
+    body('password').not().isEmpty().withMessage('Must have a good password'),
   ]
+}
+const catValidationRules = () => {
+  return [body('name').not().isEmpty().withMessage('Category must have a name')]
 }
 const userValidationRules = () => {
   return [
@@ -65,6 +68,7 @@ const validate = (req, res, next) => {
 }
 module.exports = {
   loginValidationRules,
+  catValidationRules,
   postValidationRules,
   userValidationRules,
   validate,

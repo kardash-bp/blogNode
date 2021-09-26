@@ -8,7 +8,9 @@ const postSchema = new mongoose.Schema(
     category: String,
     text: { type: String, required: true, minlength: 3 },
     imageUrl: String,
-    comments: [{ body: String, date: Date }],
+    comments: [
+      { name: String, body: String, date: { type: Date, default: Date.now } },
+    ],
     date: { type: Date, default: Date.now },
     author: {
       type: mongoose.Schema.Types.ObjectId,

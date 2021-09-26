@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./partials/head'); %>
+  <head><%- include('./partials/head'); %>
+
+<link rel="stylesheet" type="text/css" href="../../css/widgEditor.css">
+    <script type="application/javascript" src="../../js/widgEditor.js"></script>
+  </head>
 
   <body >
     <%- include('./partials/navbar'); %> <%- include('./partials/mainHeader');
@@ -14,6 +18,29 @@
       <% }) %> <% } %>
 
       <h1><%= title %></h1>
+      <hr>
+      <% if(currentUser.role === 'admin') {%>
+
+<form method="POST" action="/post/cat" >
+   <% if (msg.success) { %>
+      <div class="alert alert-success"><%= msg.success %></div>
+      <% } else if (msg.error) { %>
+      <div class="alert alert-error"><%= msg.error %></div>
+      <% } %>
+        <div class="form-group">
+          <label for="category">Add Category</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            id="category"
+            placeholder="Enter a category"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary my-3">Save Category</button>
+</form>
+<hr>
+        <% } %>
       <form method="POST" action="/post/add" enctype="multipart/form-data">
         <div class="form-group">
           <label for="exampleFormControlInput1">Title</label>
@@ -40,7 +67,7 @@
           <label for="select-category">Category</label>
           <select
             name="category"
-            class="form-control w-50"
+            class="form-control w-50 mb-3"
             id="select-category"
           >
              <% cat.forEach(c => { %>
@@ -50,15 +77,11 @@
         </div>
         <% } %>
         <div class="form-group">
-          <label for="textarea-body">Post text</label>
-          <textarea
-            name="text"
-            class="form-control"
-            id="textarea-body"
-            rows="3"
-          >
-          </textarea>
+
+        <textarea id="noise" name="text" class="widgEditor nothing">
+        </textarea>
         </div>
+        <hr />
         <div class="form-group">
           <label>Upload post image</label>
         <input type="file" name="post-img" />
@@ -69,5 +92,6 @@
     </main>
 
     <%- include('./partials/footer'); %>
+
   </body>
 </html>

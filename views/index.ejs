@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/head.ejs') %>
+  <head>
+    <%- include('partials/head.ejs') %>
+  </head>
   <body>
     <%- include('partials/navbar.ejs') %> <%- include('partials/mainHeader.ejs')
     %>
@@ -27,10 +29,12 @@
                 src="<%= post.imageUrl %>"
                 alt="post-image"
               />
-              <%} %> <%= truncate(post.text, 250, '...') %>
+              <% } %> <%= truncate(post.text, 250, '...') %>
             </a>
             <p class="post-meta">
-              Posted in <%= post.category %> by
+              Posted in
+              <a href="/post/cat/<%= post.category %>"><%= post.category %></a>
+              by
               <a href="#!">Boban PP</a>
               on <%= moment(post.date).format('DD MMM YY') %>
             </p>

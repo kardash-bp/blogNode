@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
 const catSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String },
 })
 module.exports = mongoose.model('Category', catSchema)

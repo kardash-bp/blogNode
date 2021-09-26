@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('./partials/head') %>
+  <head>
+    <%- include('./partials/head') %>
+  </head>
 
   <body>
     <%- include('partials/navbar') %> <%- include('partials/mainHeader') %>
@@ -11,18 +13,34 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
           <div class="col-md-10 col-lg-8 col-xl-7">
             <h2><%= post.title %></h2>
+
+            <h5><%= post.subtitle %></h5>
             <p class="post-meta">
               Posted in <%= post.category %> by
               <strong><%= user.username %></strong> added on <%=
               moment(post.date).format('DD MMM YYYY') %>
             </p>
-            <h4><%= post.subtitle %></h4>
             <img
               class="img-fluid"
               src="<%= post.imageUrl %>"
               alt="post image"
             />
             <p><%= post.text %></p>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <hr />
+            <h4>Comments</h4>
+            <hr />
+            <% if(post.comments.length > 0) {%> <%
+            post.comments.sort((a,b)=>b.date - a.date).forEach(c => { %>
+            <hr />
+            <h5><%= c.name %>:</h5>
+            <p>added on <%= moment(c.date).format('DD MMM YYYY') %></p>
+            <p><%= c.body %></p>
+            <% }) %> <% } %>
+          </div>
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <%- include('partials/commentForm') %>
           </div>
         </div>
       </div>

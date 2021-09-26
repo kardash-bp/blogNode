@@ -5,8 +5,8 @@ const morgan = require('morgan')
 require('./Database')
 const xss = require('xss-clean')
 const flash = require('connect-flash')
-const expressValidator = require('express-validator')
 const { nanoid } = require('nanoid')
+
 const blogRouter = require('./routers/blogRouter')
 const postRouter = require('./routers/postRouter')
 const userRouter = require('./routers/userRouter')
@@ -43,24 +43,16 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 //====
+
 app.locals.moment = require('moment')
-app.locals.truncate = (str, max, suffix) =>
+app.locals.truncate = (str = 0, max, suffix) =>
   str.length < max
     ? str
     : `${str.substr(
         0,
         str.substr(0, max - suffix.length).lastIndexOf(' ')
       )}${suffix}`
-// use for field validation and customizing the messages
-// app.use(
-//   expressValidator({
-//     errorFormatter: function (param, msg, value) {
-//       return {
-//         message: msg,
-//       }
-//     },
-//   })
-// )
+
 app.use('/user', userRouter)
 app.use('/post', postRouter)
 app.use('/', blogRouter)
