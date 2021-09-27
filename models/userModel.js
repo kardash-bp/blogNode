@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const Post = require('./post')
+const Post = require('./postModel')
 
 const userSchema = mongoose.Schema(
   {
@@ -22,6 +22,7 @@ const userSchema = mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Password is mandatory'],
+      trim: true,
     },
     avatar: {
       type: Buffer,
@@ -34,6 +35,9 @@ const userSchema = mongoose.Schema(
     created: {
       type: Date,
       default: Date.now,
+    },
+    token: {
+      type: String,
     },
     /* For reset password */
     resetPasswordToken: {
@@ -59,4 +63,16 @@ userSchema.methods.toJSON = function () {
   delete user.avatar
   return user
 }
+userSchema.methods.generateToken = function () {
+  return jwt.sign({ user: this }, process.env.JWT_SECRET, {
+    algorithm: 'HS256',
+    expiresIn: process.env.JWT_EXPIRE,
+  })
+}
+userSchema.pre('save', async function (next) {
+  if (this.isModified('password')) {
+    this.password = await bcrypt.hash(this.password, 8)
+  }
+  next()
+})
 module.exports = mongoose.model('User', userSchema)

@@ -1,6 +1,6 @@
 const { body, validationResult } = require('express-validator')
-const User = require('../models/user')
-const Post = require('../models/post')
+const User = require('../models/userModel')
+const Post = require('../models/postModel')
 
 const postValidationRules = () => {
   return [

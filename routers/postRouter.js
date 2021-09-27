@@ -1,15 +1,15 @@
 const express = require('express')
 const multer = require('multer')
 const router = express.Router()
-const Post = require('../models/post')
-const User = require('../models/user')
-const Category = require('../models/category')
-const auth = require('../middleware/auth')
+const Post = require('../models/postModel')
+const User = require('../models/userModel')
+const Category = require('../models/categoryModel')
+const auth = require('../helpers/auth')
 const {
   postValidationRules,
   catValidationRules,
   validate,
-} = require('../middleware/validator')
+} = require('../helpers/validator')
 const storage = multer.diskStorage({
   destination: './public/uploads',
   filename: function (req, file, cb) {

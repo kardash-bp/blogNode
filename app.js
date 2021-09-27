@@ -1,21 +1,24 @@
 const express = require('express')
 const helmet = require('helmet')
 const path = require('path')
+const cors = require('cors')
 const morgan = require('morgan')
 require('./Database')
 const xss = require('xss-clean')
 const flash = require('connect-flash')
-const { nanoid } = require('nanoid')
-
+const cookieParser = require('cookie-parser')
 const blogRouter = require('./routers/blogRouter')
 const postRouter = require('./routers/postRouter')
 const userRouter = require('./routers/userRouter')
 const multer = require('multer')
-const upload = multer({ dest: './public/uploads/' })
+//const upload = multer({ dest: './public/uploads/' })
 const app = express()
 app.use(helmet())
 app.use(morgan('short'))
 app.use(xss())
+// Allow cors everywhere
+app.use(cors())
+app.use(cookieParser()) // cookies res.cookie()
 // ===== session setup =============
 const session = require('express-session')
 const sess = {
@@ -43,7 +46,6 @@ app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
 //====
-
 app.locals.moment = require('moment')
 app.locals.truncate = (str = 0, max, suffix) =>
   str.length < max
@@ -65,9 +67,13 @@ app.use(function (req, res, next) {
   err.shouldRedirect = true
   next(err)
 })
-
 // define error-handling middleware last, after other app.use() and routes calls
 app.use(function (err, req, res, next) {
+  // if (err.name === 'UnauthorizedError') {
+  //   res.status(err.status).send({ message: err.message })
+  //   logger.error(err)
+  //   return
+  // }
   // console.error(err.message)
   if (!err.status) err.status = 500 // Sets a generic server error status code if none is part of the err
 
